@@ -1,0 +1,18 @@
+{
+  "appenders": [
+    {
+      "type": "console"
+    },
+    {
+      "category": "angular-bar",
+      "type": "dateFile",
+      "filename": "./logs/tmp-tests.log",
+      "pattern": "-yyyy-MM-dd",
+      "alwaysIncludePattern": false,
+      "layout": {
+        "type": "pattern",
+        "pattern": "[%d] [%p] - %m%n"
+      }
+    }
+  ]
+}

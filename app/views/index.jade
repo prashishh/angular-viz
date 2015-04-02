@@ -1,4 +1,27 @@
 extends layouts/layout
 
 block content
-	p Hello World
+	div(layout="column", ng-controller="homeController")
+		section(layout="row")
+			md-toolbar(layout="row", layout-padding="true")
+				div(flex="90") Angular Bar
+				div(flex="true")
+
+		md-whiteframe(class="md-whiteframe-z", layout="row")
+			div(flex="15", layout-padding="true")
+				md-list
+					md-input-container(class="custom-search")
+						label Search
+						input.form-control(type="text", name="search")
+					md-item-content(class="md-tile-content ") Home
+					md-divider
+					md-item-content(class="md-tile-content") Bar Chart
+					md-divider
+					md-item-content(class="md-tile-content") Line Chart
+					md-divider
+					md-item-content(class="md-tile-content") Tables
+					md-divider
+
+			div(flex="true", layout-padding="true")
+				md-content(class="md-padding")
+					h3(class="md-flex") Dashboard

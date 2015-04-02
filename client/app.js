@@ -1,19 +1,23 @@
 'use strict';
 
-var logisticsApp = angular.module('dashboardApp', ['ngRoute', 'ngResource'])
-		.config(function($routeProvider, $locationProvider) {
+var dashboardApp = angular.module('dashboardApp', ['ngRoute', 'ngResource', 'ngMaterial'])
+		.config(function($routeProvider, $locationProvider, $mdThemingProvider) {
+
+			// change default color palette to deep orange
+			$mdThemingProvider.theme('default')
+				.primaryPalette('deep-orange');
 
 			$routeProvider
-				.when('/home', {
+				.when('/', {
 					templateUrl: 'partials/home',
-					controller: 'homeController'
+					controller: 'HomeController'
 				})
 				.otherwise({
-					redirectTo: '/home'
+					redirectTo: '/'
 				});
 
 			$locationProvider.html5Mode({
 				enabled: true,
 				requireBase: false
 			});
-	})
+	});

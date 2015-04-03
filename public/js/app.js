@@ -10,7 +10,7 @@ var dashboardApp = angular.module('dashboardApp', ['ngRoute', 'ngResource', 'ngM
 			$routeProvider
 				.when('/', {
 					templateUrl: 'partials/home',
-					controller: 'HomeController'
+					controller: 'homeController'
 				})
 				.otherwise({
 					redirectTo: '/'
@@ -26,7 +26,7 @@ var dashboardApp = angular.module('dashboardApp', ['ngRoute', 'ngResource', 'ngM
 /* global dashboardApp, c3 */ 
 
 dashboardApp.
-  controller('homeController', function ($scope, $http, dataService, $timeout) {
+  controller('homeController', function ($scope, $http, dataService, $interval) {
   	
   });
 
@@ -35,10 +35,63 @@ dashboardApp.
 /* Service */
 
 /* global dashboardApp */ 
+
+dashboardApp.directive('lineChart', ['dataService', '$interval', function(dataService, $interval) {
+	return {
+		restrict: 'E',
+    scope: {
+      lineId: '@',
+      realTime: '@'
+    },
+		template: '<div id="{{lineId}}">Hello {{lineId}}</div>',
+		link: function(scope, iElement, iAttrs) {
+      
+      dataService.getData(function(data) {
+         scope.chart = c3.generate({
+            bindto: '#' + scope.lineId,
+            size: {
+                height: 240,
+                width: 480
+            },
+            data: {
+              columns:  [
+                data
+              ]
+            }
+          });
+       });
+
+      if(scope.realTime === 'y') {
+      	$interval(function () {
+          dataService.getData(function(data) {
+            scope.chart.load({
+                columns: [
+                    data
+                ]
+            });
+          });
+        }, 3000);
+      }
+    }
+	}
+}]);
+'use strict';
+
+/* Service */
+
+/* global dashboardApp */ 
 dashboardApp.factory('dataService', function($http) {
 	return {
 		getData : function(callback) {
-			$http.get('/api/data').success(callback);
+			var new_data = [];
+			$http.get('/api/data').success(function(data, status, headers, config) {
+				new_data.push('data1');
+
+        for (var i = 0; i < data.length; i++)
+          new_data.push(parseInt(data[i]));
+				
+				callback(new_data);
+			});
 		}
 	};
 });

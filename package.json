@@ -1,7 +1,7 @@
 {
-  "name": "angular-bar",
+  "name": "angular-viz",
   "version": "0.0.1",
-  "description": "a simple real-time angular graph with node ",
+  "description": "a simple real-time angular visualization using c3.js ",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,6 +16,7 @@
     "gulp": "^3.8.11",
     "helmet": "^0.7.1",
     "jade": "^1.9.2",
+    "karma": "^0.12.31",
     "log4js": "^0.6.22",
     "method-override": "^2.3.2",
     "morgan": "^1.5.2",

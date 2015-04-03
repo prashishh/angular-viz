@@ -10,7 +10,7 @@ var dashboardApp = angular.module('dashboardApp', ['ngRoute', 'ngResource', 'ngM
 			$routeProvider
 				.when('/', {
 					templateUrl: 'partials/home',
-					controller: 'HomeController'
+					controller: 'homeController'
 				})
 				.otherwise({
 					redirectTo: '/'
